@@ -8,6 +8,24 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ show: false, msg: "" });
+  const [movies, setMovies] = useState([]);
+  const [query, setQuery] = useState("batman");
+
+  const fetchMovies = async (url) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovies(`${API_ENDPOINT}&s=${query}`);
+  }, [query]);
+
   return <AppContext.Provider value="hello">{children}</AppContext.Provider>;
 };
 // make sure use

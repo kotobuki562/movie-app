@@ -1,9 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { API_ENDPOINT } from './context'
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { API_ENDPOINT } from "./context";
 
 const SingleMovie = () => {
-  return <h2>single movie</h2>
-}
+  const { id } = useParams();
+  const [movie, setMovie] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState({ show: false, msg: "" });
 
-export default SingleMovie
+  const fetchMovie = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, [id]);
+
+  return <h2>single movie</h2>;
+};
+
+export default SingleMovie;
